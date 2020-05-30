@@ -4,6 +4,7 @@ if (!isset($_SESSION["login"])) {
   header("Location: login.php");
   exit;
 }
+
 require 'functions.php';
 
 ?>
@@ -22,9 +23,9 @@ require 'functions.php';
 
   <title>Home</title>
 </head>
-
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Bengkel Mobil</a>
+  <a class="navbar-brand" href="index.php">Bengkel Mobil</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -34,10 +35,10 @@ require 'functions.php';
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="customer.php">Customer</a>
+        <a class="nav-link" href="servis.php">Servis</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="transaction.php">Transaction</a>
+        <a class="nav-link" href="user-transaksi.php">Transaksi</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="logout.php">Logout</a>
@@ -46,32 +47,36 @@ require 'functions.php';
   </div>
 </nav>
 
-<body>
 
-  <center><div class="alert alert-success" role="alert">
-    <?php echo "Selamat Datang, ";
-    echo $_SESSION["username"]; ?>
-  </div></center>
-  <div class="card-deck" style="margin: 80px 250px">
-    <div class="card">
-      <img src="img/customers.png" class="card-img-top" width="100px">
-      <div class="card-body"><br>
-        <center><a class="btn btn-primary" href="customer.php" role="button">Customer</a></center>
-      </div>
+
+  <center>
+    <div class="alert alert-success" role="alert">
+    <?php echo "Hai, " . $_SESSION["nama_pelanggan"];?>
     </div>
-    <div class="card">
-      <img src="img/transaksi.png" class="card-img-top" width="100px">
-      <div class="card-body"><br>
-        <center><a class="btn btn-primary" href="transaction.php" role="button">Transaction</a></center>
-      </div>
-    </div>
-    <div class="card">
-      <img src="img/sp.png" class="card-img-top" width="100px">
-      <div class="card-body">
-        <center><a class="btn btn-primary" href="sparepart.php" role="button">Sparepart</a></center>
-      </div>
-    </div>
+  </center>
+
+  <center>
+  <div class="card-deck" style="margin: 80px 450px">
+  <div class="card col-6">
+        <div class="card-body mb-2">
+          <img src="img/sp.png" class="card-img-top mt-2" width="10px">
+        </div>
+        
+        <div class="card-body">
+            <a class="btn btn-primary" href="servis.php" role="button">Servis</a>
+        </div>
   </div>
+  <div class="card col-6">
+        <div class="card-body mb-2">
+          <img src="img/transaksi.png" class="card-img-top mt-2" width="10px">
+        </div>
+        
+        <div class="card-body">
+            <a class="btn btn-primary" href="user-transaksi.php" role="button">Transaksiku</a>
+        </div>
+  </div>
+  </div>
+  </center>
 
 </body>
 

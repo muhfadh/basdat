@@ -6,17 +6,27 @@ if (isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+    $result = mysqli_query($conn, "SELECT * FROM pelanggan INNER JOIN user ON pelanggan.id_pelanggan=user.id_pelanggan WHERE username='$username'");
 
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
-        if (isset($password, $row["password"])) {
-            header("Location: index.php");
+        if (password_verify($password, $row["password"])) {
             $_SESSION["login"] = true;
-            $_SESSION["username"] = $row["username"];
+            $_SESSION["nama_pelanggan"] = $row["nama_pelanggan"];
+            $_SESSION["id_pelanggan"] = $row["id_pelanggan"];
+            $_SESSION["no_hp"] = $row["no_hp"];
+            $_SESSION["nik"] = $row["nik"];
+            if($username == "admin"){
+                header("Location: admin.php");
+                $_SESSION["admin"] = true;
+                exit;
+            }
+            header("Location: index.php");
             exit;
         }
     }
+
+    
     $error = true;
 }
 ?>
@@ -53,8 +63,9 @@ if (isset($_POST["login"])) {
                         <input type="password" class="form-control" name="password" id="password">
                     </div>
                 </center>
-                <input type="submit" name="login" class="btn btn-primary" value="LOGIN">
+                <button type="submit" name="login" class="btn btn-primary">Login</button> 
             </form>
+            <a class="btn btn-primary mt-3" href="register.php">Belum punya akun?</a> 
         </div>
     </div>
 
